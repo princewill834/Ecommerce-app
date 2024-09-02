@@ -9,6 +9,7 @@ import Button from "./Button";
 import Image from "next/image";
 
 import Gamepad from "../../public/assets/images/GamePad.svg"
+import Link from "next/link";
 
 // Define the type for the product items
 interface Product {
@@ -59,7 +60,8 @@ const OurProductSection: React.FC = () => {
       {/* Rendering the card data here */}
       <div className="flex flex-wrap gap-7 px-[5%] pt-5">
         {products.map(product => (
-          <div key={product.id} className="w-[23%]">
+          <Link href={`/${product.id}`} key={product.id}>
+          <div className="w-[23%] cursor-pointer">
             <div
               className="h-[250px] bg-[#f5f5f5] rounded-[4px] relative"
               onMouseEnter={() => setHoveredIndex(product.id)}
@@ -93,6 +95,7 @@ const OurProductSection: React.FC = () => {
               </div>
             </div>
           </div>
+          </Link>
         ))}
       </div>
       <div className="flex justify-center mt-[5%]">

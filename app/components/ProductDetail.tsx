@@ -1,4 +1,5 @@
-import React from "react";
+"use client"
+import React, { use, useEffect, useState } from "react";
 import image1 from "../../public/assets/images/image 57 copy.svg"
 import image2 from "../../public/assets/images/image 58 copy.svg"
 import image3 from "../../public/assets/images/image 59 copy.svg"
@@ -9,12 +10,27 @@ import Image from "next/image";
 import frame2 from "../../public/assets/images/Frame 911.svg"
 import Button from "./Button";
 import like from "../../public/assets/images/heart.svg"
+import { useRouter } from "next/router";
 
 
 const Images = [image1, image2,image3,image4]
 const divContents = ["XS","S", "M", "L", "XL"]
 
 const ProuctImage = () =>{
+
+    // const router = useRouter()
+    // const {id} = router.query
+    // const [product, setProduct] = useState(null)
+
+
+    // // const getProductDetail = async ()=>{
+    // //     const res= await fetch(`https://fakestoreapi.com/products/${id}`)
+    // //     const data = await res.json()
+    // //     setProduct(data)
+    // // }
+    // // useEffect(()=>{
+    // //     getProductDetail()
+    // // },[id])
 
     return(
         <section className="px-[5%] pb-[140px]">
@@ -25,15 +41,23 @@ const ProuctImage = () =>{
         </div>  
         <div className="flex gap-7 h-[581px]">
             <div className="flex flex-col gap-4 ">
-                {Images.map((img, index)=>{
-                    return(
+
                         <div 
-                        key={index}
                         className="w-[170px] h-[138px] flex justify-center  p-[12px_24px_12px_25px] rounded-tl-[4px]  bg-[#f5f5f5]">
-                            <Image src={img} alt="Game Pad"/>
+                            <Image src={image1} alt="Game Pad"/>
                         </div>
-                    )
-                })}
+                        <div 
+                        className="w-[170px] h-[138px] flex justify-center  p-[12px_24px_12px_25px] rounded-tl-[4px]  bg-[#f5f5f5]">
+                            <Image src={image2} alt="Game Pad"/>
+                        </div>
+                        <div 
+                        className="w-[170px] h-[138px] flex justify-center  p-[12px_24px_12px_25px] rounded-tl-[4px]  bg-[#f5f5f5]">
+                            <Image src={image3} alt="Game Pad"/>
+                        </div>
+                        <div 
+                        className="w-[170px] h-[138px] flex justify-center  p-[12px_24px_12px_25px] rounded-tl-[4px]  bg-[#f5f5f5]">
+                            <Image src={image4} alt="Game Pad"/>
+                        </div>
                 
             </div>
 

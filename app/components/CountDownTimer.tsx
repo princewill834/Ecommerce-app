@@ -1,9 +1,10 @@
+"use client"
 import React from "react";
 // Correct import of the hook
 import { useTimerTracker } from "./useTimeTracker";
 
 const CountDownTimer = () => {
-  const initialTime = 25 * 24 * 60 * 60 * 1000;
+  const initialTime = 14 * 24 * 60 * 60 * 1000;
   const { days, hours, minutes, seconds } = useTimerTracker(initialTime);
 
   return (
