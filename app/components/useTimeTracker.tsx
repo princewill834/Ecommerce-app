@@ -1,42 +1,45 @@
-// useTimeTracker.js
 "use client";
 import { useState, useEffect } from "react";
 
-// Correctly export the hook
 export const useTimerTracker = (initialTime: number) => {
-  // Retrieve the stored time from localStorage or calculate a new one
-  const storedEndTime = localStorage.getItem('endTime')
-  const endTime = storedEndTime ? parseInt(storedEndTime, 10) : Date.now() + initialTime
-
-  const [timeLeft, setTimeLeft] = useState<number>(endTime - Date.now());
+  // State for time left
+  const [timeLeft, setTimeLeft] = useState<number>(0);
 
   useEffect(() => {
+    // Make sure localStorage is accessed only on the client side
+    const storedEndTime = typeof window !== "undefined" ? localStorage.getItem('endTime') : null;
+    const endTime = storedEndTime ? parseInt(storedEndTime, 10) : Date.now() + initialTime;
+
     // if no time is stored, we set a new one
-    if(!storedEndTime){
-      localStorage.setItem('endTime',endTime.toString() )
+    if (typeof window !== "undefined" && !storedEndTime) {
+      localStorage.setItem('endTime', endTime.toString());
     }
 
-    //update the time every second
+    // Set initial time left
+    setTimeLeft(endTime - Date.now());
+
+    // Update the time every second
     const timer = setInterval(() => {
-      const currentTime = Date.now()
-      const newTimeleft = endTime - currentTime;
+      const currentTime = Date.now();
+      const newTimeLeft = endTime - currentTime;
 
-      if(newTimeleft < 0){
+      if (newTimeLeft < 0) {
         clearInterval(timer);
-        localStorage.removeItem("endTime")
+        if (typeof window !== "undefined") {
+          localStorage.removeItem("endTime");
+        }
         setTimeLeft(0);
-      }else{
-        setTimeLeft(newTimeleft)
+      } else {
+        setTimeLeft(newTimeLeft);
       }
-    },1000);
-     
-    return () => clearInterval(timer);
-  }, [endTime, storedEndTime]);
+    }, 1000);
 
+    return () => clearInterval(timer);
+  }, [initialTime]);
+
+  // Calculate days, hours, minutes, seconds
   const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
-  const hours = Math.floor(
-    (timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-  );
+  const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
   const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
   const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
 
