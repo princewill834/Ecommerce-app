@@ -7,12 +7,12 @@ export const useTimerTracker = (initialTime: number) => {
 
   useEffect(() => {
     // Make sure localStorage is accessed only on the client side
-    const storedEndTime = typeof window !== "undefined" ? localStorage.getItem('endTime') : null;
+    const storedEndTime = typeof window !== "undefined" ? window.localStorage.getItem('endTime') : null;
     const endTime = storedEndTime ? parseInt(storedEndTime, 10) : Date.now() + initialTime;
 
     // if no time is stored, we set a new one
     if (typeof window !== "undefined" && !storedEndTime) {
-      localStorage.setItem('endTime', endTime.toString());
+      window.localStorage.setItem('endTime', endTime.toString());
     }
 
     // Set initial time left
@@ -26,7 +26,7 @@ export const useTimerTracker = (initialTime: number) => {
       if (newTimeLeft < 0) {
         clearInterval(timer);
         if (typeof window !== "undefined") {
-          localStorage.removeItem("endTime");
+          window.localStorage.removeItem("endTime");
         }
         setTimeLeft(0);
       } else {
