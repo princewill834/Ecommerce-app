@@ -5,31 +5,31 @@ const Hero = () => (
   <section className="flex items-start px-[5%]">
     <div className="flex flex-col space-y-2 font-poppins w-[217px] mt-[40px] text-[16px] pl-2">
       <a href="#" className="hover:underline pb-2">
-        Woman's Fashion
+        Woman&apos;s Fashion
       </a>
       <a href="#" className="hover:underline pb-2">
-        Men's Fashion
+        Men&apos;s Fashion
       </a>
       <a href="#" className="hover:underline pb-2">
         Electronics
       </a>
       <a href="#" className="hover:underline pb-2">
-        Home & Lifestyle
+        Home &amp; Lifestyle
       </a>
       <a href="#" className="hover:underline pb-2">
         Medicine
       </a>
       <a href="#" className="hover:underline pb-2">
-        Sports & Outdoor
+        Sports &amp; Outdoor
       </a>
       <a href="#" className="hover:underline pb-2">
-        Baby's & Toys
+        Baby&apos;s &amp; Toys
       </a>
       <a href="#" className="hover:underline pb-2">
-        Groceries & Pets
+        Groceries &amp; Pets
       </a>
       <a href="#" className="hover:underline pt-2">
-        Health & Beauty
+        Health &amp; Beauty
       </a>
     </div>
     <div className="flex items-center">
