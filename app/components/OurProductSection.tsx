@@ -7,6 +7,7 @@ import EyeFill from "./EyeFill";
 import Heart from "./Heart";
 import Button from "./Button";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 import Gamepad from "../../public/assets/images/GamePad.svg"
 import Link from "next/link";
@@ -24,6 +25,9 @@ interface Product {
 }
 
 const OurProductSection: React.FC = () => {
+
+  const router = useRouter()
+
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [products, setProducts] = useState<Product[]>([])
 
@@ -34,6 +38,12 @@ const OurProductSection: React.FC = () => {
   const handleRightArrowClick = () =>{
     //code here
   }
+  
+
+  const redirectToProductDetail = (id: number) => {
+    router.push(`/products?id=${id}`);
+  };
+
 
   const getData = async () =>{
    const res = await fetch('https://fakestoreapi.com/products?limit=8')
@@ -58,10 +68,10 @@ const OurProductSection: React.FC = () => {
         </div>
       </div>
       {/* Rendering the card data here */}
-      <div className="flex flex-wrap gap-7 px-[5%] pt-5">
+      <div className="flex flex-wrap gap-7 px-[5%] pt-5" >
         {products.map(product => (
          
-          <div className="w-[23%] cursor-pointer" key={product.id}>
+          <div className="w-[23%] cursor-pointer" key={product.id}  onClick={() => redirectToProductDetail(product.id)} >
             <div
               className="h-[250px] bg-[#f5f5f5] rounded-[4px] relative"
               onMouseEnter={() => setHoveredIndex(product.id)}
@@ -71,7 +81,7 @@ const OurProductSection: React.FC = () => {
                 <Heart />
                 <EyeFill />
               </div>
-              <div className="w-[190px] top-[35px] left-[40px] absolute flex justify-center items-center">
+              <div className="w-[190px] top-[35px] left-[40px] absolute flex justify-center items-center" >
                 <Image 
                 src={product.image} 
                 alt={product.title}

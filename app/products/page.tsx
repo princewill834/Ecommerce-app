@@ -1,11 +1,11 @@
 import React from "react";
-import ProductsDetails from "../components/ProductDetailSection";
+import ProductDetailSection from "../components/ProductDetailSection";
 
 
 
 const Products = () =>(
     <main>
-        <ProductsDetails/>
+        <ProductDetailSection/>
     </main>
 )
 
